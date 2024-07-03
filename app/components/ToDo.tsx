@@ -1,6 +1,5 @@
 "use client";
 import axios from "axios";
-import { todo } from "node:test";
 import React, { useEffect, useState } from "react";
 
 interface ToDoProps {
@@ -57,9 +56,9 @@ export default function ToDo() {
   };
 
   useEffect(() => {
-    // Fetch todos from a dummy data
+    // Fetch todos from a dummy api
     axios
-      .get("https://jsonplaceholder.typicode.com/todos?_limit=10")
+      .get("https://jsonplaceholder.typicode.com/todos?_limit=20")
       .then((response) => setToDos(response.data))
       .catch((error) => console.error("Error fetching data", error));
   }, []);
@@ -71,7 +70,7 @@ export default function ToDo() {
         <input
           type="text"
           placeholder="What Task do you have today?"
-          className="flex-grow p-2 border border-gray-300 rounded"
+          className="flex-grow p-2 border border-gray-300 rounded outline-none"
           value={newToDo}
           onChange={(e) => setNewToDo(e.target.value)}
         />
@@ -83,7 +82,7 @@ export default function ToDo() {
         </button>
       </form>
 
-      <ul>
+      <ul className="flex flex-col gap-2">
         {toDos.map((todo) => (
           <li
             key={todo.id}
